@@ -1,0 +1,57 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Guthrie Theater";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">🎭 Guthrie Theater 🎭</h1>
+    
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5>Current Shows:</h5>
+            <ul class="list-group">
+                @for (int i = 0; i < Model.SampleShows.Length; i++)
+                {
+                    <li class="list-group-item">@Model.SampleShows[i]</li>
+                }
+            </ul>
+        </div>
+    </div>
+
+    @if (!Model.ShowResults)
+    {
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5>Add Your Shows</h5>
+                <form method="post">
+                    @for (int i = 0; i < 3; i++)
+                    {
+                        <div class="mb-3">
+                            <label class="form-label">Show #@(i + 1):</label>
+                            <input type="text" name="Shows[@i]" class="form-control" required>
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    }
+
+    @if (Model.ShowResults)
+    {
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5>Your Shows:</h5>
+                <ul class="list-group">
+                    @for (int i = 0; i < Model.Shows.Length; i++)
+                    {
+                        <li class="list-group-item">@(i + 1). @Model.Shows[i]</li>
+                    }
+                </ul>
+                <p class="text-center mt-3"><a href="/" class="btn btn-primary">Add Different Shows</a></p>
+            </div>
+        </div>
+    }
+</div>
+
